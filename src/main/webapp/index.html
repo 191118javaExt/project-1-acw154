@@ -98,18 +98,22 @@
             <span class="login-form-title">
                 Employee Log In
             </span>
-            <form action="employee/home.html" method="POST">
+            <form action="login" method="POST">
                 <div class="container">
-                    <label for="uname"><strong>Username</strong></label>
-                    <input type="text" placeholder="Enter your username" name="uname" required>
+                    <label for="username"><strong>Username</strong></label>
+                    <input type="text" placeholder="Enter your username" name="username" required>
                     
-                    <label for="pwd"><strong>Password</strong></label>
-                    <input type="password" placeholder="Enter your password" name="pwd" required>
+                    <label for="password"><strong>Password</strong></label>
+                    <input type="password" placeholder="Enter your password" name="password" required>
 
                     <button type="submit">Login</button>
                     <label>
                         <input type="checkbox" checked="checked" name="remember"> Remember me
                     </label>
+                    
+                    <hr>
+                    <a class="btn btn-success" href="register_user.html">REGISTER</a>
+                   
                 </div>
             </form>
         </div>

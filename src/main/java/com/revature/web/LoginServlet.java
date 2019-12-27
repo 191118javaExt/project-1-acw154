@@ -26,7 +26,8 @@ public class LoginServlet extends HttpServlet {
 		throws ServletException, IOException {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		
+		System.out.println(username);
+		System.out.println(password);
 		logger.info("User attempted to login with username " + username);
 		User u = UserService.verifyUser(username, password);
 		if(u != null) {
