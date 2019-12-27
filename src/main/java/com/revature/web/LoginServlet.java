@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.revature.models.User;
+import com.revature.models.UserRoles;
 import com.revature.services.UserService;
 import com.revature.util.HtmlTemplate;
 
@@ -30,11 +31,18 @@ public class LoginServlet extends HttpServlet {
 		User u = UserService.verifyUser(username, password);
 		if(u != null) {
 			HttpSession session = req.getSession();
+			logger.info("User is of role " + UserRoles.valueOf(u.getRole_id()));
 			// Gets the current session, or creates one if it did not exist
 			session.setAttribute("username", username);
-			RequestDispatcher rd = req.getRequestDispatcher("user/home.html");
-			rd.forward(req, res);
-			logger.info(username + " has successfully logged in");
+			if(u.getRole_id() == 0) {
+				RequestDispatcher rd = req.getRequestDispatcher("employee/home.html");
+				rd.forward(req, res);
+				logger.info(username + " has successfully logged in");
+			} else {
+				RequestDispatcher rd = req.getRequestDispatcher("fm/home.html");
+				rd.forward(req, res);
+				logger.info(username + " has successfully logged in");
+			}
 		} else {
 			PrintWriter out = HtmlTemplate.getHtmlWriter(res);
 			logger.info(username + " has failed to login.");

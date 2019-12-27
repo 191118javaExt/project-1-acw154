@@ -8,7 +8,7 @@ import com.revature.repositories.ReimbursementDAO;
 import com.revature.repositories.ReimbursementDAOImpl;
 
 public class ReimbursementService {
-	ReimbursementDAO repository = new ReimbursementDAOImpl();
+	private static ReimbursementDAO repository = new ReimbursementDAOImpl();
 	
 	public Reimbursement findReimbursement(int reimb_id) {
 		return repository.findReimbursement(reimb_id);

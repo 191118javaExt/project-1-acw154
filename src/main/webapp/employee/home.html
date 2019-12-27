@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Employee Home Page</title>
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+    
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: url("images/backgrounds/gradientback.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+        overflow: hidden;
+        width: 100%;    
+        height: 100vh;
+    }
+    
+    .btn-group button {
+        background-color: #4CAF50; /* Green background */
+        border: 1px solid green; /* Green border */
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        float: left; /* Float the buttons side by side */
+    }
+
+    /* Clear floats (clearfix hack) */
+    .btn-group:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .btn-group button:not(:last-child) {
+        border-right: none; /* Prevent double borders */
+    }
+
+    /* Add a background color on hover */
+    .btn-group button:hover {
+        background-color: #011301;
+    }
+
+    .jumbotron {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+        background-color: #e9ecef;
+        border-radius: 0.3rem;
+        font-size: 22pt;
+        background: #f10505; /* Old browsers */
+        background: -moz-linear-gradient(top, #fa9090 0%, #e63939 14%, #f50909 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #fa9090 0%, #e63939 14%, #f50909 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #fa9090 0%, #e63939 14%, #f50909 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0b7a1', endColorstr='#bf6e4e',GradientType=0 ); /* IE6-9 */  
+    }
+
+    .container{
+
+    }
+    </style>
+</head>
+<body>
+    <div class="jumbotron">Welcome</div>
+        <br></br>
+        <br></br>
+        <br>
+        <div class=.container-fluid>
+            <div class="btn-group" style="width:100%">
+                <form action="employee_submission">
+                    <button style="width:50%">Submit New Reimbursement</button>
+                </form>
+                <form action="view_reimbursements">
+                    <button style="width:50%">View Reimbursements</button>
+                </form>
+            </div>
+            <hr>
+            <a class="btn btn-success" href="../index.html">LOGOUT</a>
+        </div>
+</body>
+</html>

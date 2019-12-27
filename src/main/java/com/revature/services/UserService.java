@@ -12,24 +12,28 @@ import com.revature.repositories.UserDAOImpl;
 public class UserService {
 	private static UserDAO repository = new UserDAOImpl();
 	
-	public User findUser(int user_id) {
+	public static User findUser(int user_id) {
 		return repository.findUser(user_id);
 	}
 	
-	public List<User> findAllUsers(){
+	public static List<User>  findAllUsers(){
 		return repository.findAllUsers();
 	}
 	
-	public List<User> findUsersByRole(UserRoles role){
+	public static List<User> findUsersByRole(UserRoles role){
 		return repository.findUsersByRole(role);
 	}
 	
-	public boolean createUser(User u) {
+	public static boolean createUser(User u) {
 		u.setPassword(DigestUtils.sha256Hex(u.getPassword()));
-		return repository.createUser(u);
+		if(verifyUniqueUser(u.getUsername())) {
+			return repository.createUser(u);
+		} else {
+			return false;
+		}
 	}
 	
-	public boolean deleteUser(int user_id) {
+	public static boolean deleteUser(int user_id) {
 		return repository.deleteUser(user_id);
 	}
 	
