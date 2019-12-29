@@ -11,7 +11,7 @@
     
     body {
         font-family: Arial, Helvetica, sans-serif;
-        background-image: url("images/backgrounds/gradientback.jpg");
+        background-image: url("../images/backgrounds/gradientback.jpg");
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
@@ -62,9 +62,37 @@
 
     }
     </style>
+    
+    <script>
+  	function logout() {
+  		let xhr = new XMLHttpRequest();
+
+  		xhr.open("POST", "http://localhost:8080/project-1/logout");
+  		xhr.send();
+  		
+  		sessionStorage.removeItem('currentUser');
+		window.location = "http://localhost:8080/project-1/";
+  	}
+  </script>
 </head>
 <body>
-    <div class="jumbotron">Welcome</div>
+    <div class="jumbotron">
+    	<h2 id="welcome">Welcome</h2>
+    </div>
+    <script>
+		let welcome = document.getElementById('welcome');
+		let userString = sessionStorage.getItem('currentUser');
+		if(userString === null) {
+			window.location = "http://localhost:8080/project-1/";
+		} else {
+			let currentUser = JSON.parse(userString);
+			console.log(currentUser);
+			if(currentUser != null) {
+				welcome.innerHTML = "Welcome " + currentUser.firstName + " "
+					+ currentUser.lastName;
+			}
+		}
+    </script>
         <br></br>
         <br></br>
         <br>
@@ -79,7 +107,7 @@
             </div>
             <br><br>
             <hr>
-            <a class="btn btn-success" href="../index.html">LOGOUT</a>
+            <a class="btn btn-success" onclick="logout()"">LOGOUT</a>
         </div>
 </body>
 </html>

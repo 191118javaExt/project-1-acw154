@@ -1,5 +1,6 @@
 package com.revature.web;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -12,30 +13,51 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.models.LoginTemplate;
 import com.revature.models.User;
+import com.revature.models.UserDTO;
 import com.revature.models.UserRoles;
 import com.revature.services.UserService;
-import com.revature.util.HtmlTemplate;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(LoginServlet.class);
-	
+	private static ObjectMapper om = new ObjectMapper();
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 		throws ServletException, IOException {
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-		System.out.println(username);
-		System.out.println(password);
+BufferedReader reader = req.getReader();
+		
+		StringBuilder s = new StringBuilder();
+		String line = reader.readLine();
+		while(line != null) {
+			s.append(line);
+			line = reader.readLine();
+		}
+		
+		String body = s.toString();
+		System.out.println(body);
+		LoginTemplate loginAttempt = om.readValue(body, LoginTemplate.class);
+		String username = loginAttempt.getUsername();
+		String password = loginAttempt.getPassword();
+		
 		logger.info("User attempted to login with username " + username);
 		User u = UserService.verifyUser(username, password);
 		if(u != null) {
 			HttpSession session = req.getSession();
-			logger.info("User is of role " + UserRoles.valueOf(u.getRole_id()));
 			// Gets the current session, or creates one if it did not exist
 			session.setAttribute("username", username);
-			if(u.getRole_id() == 0) {
+			
+			PrintWriter out = res.getWriter();
+			res.setContentType("application/json");
+			UserDTO uDTO = UserService.convertToDTO(u);
+			
+			out.println(om.writeValueAsString(uDTO));
+			
+			logger.info(username + " has successfully logged in");
+			if(u.getRole_id() == 1) {
 				RequestDispatcher rd = req.getRequestDispatcher("employee/home.html");
 				rd.forward(req, res);
 				logger.info(username + " has successfully logged in");
@@ -45,10 +67,8 @@ public class LoginServlet extends HttpServlet {
 				logger.info(username + " has successfully logged in");
 			}
 		} else {
-			PrintWriter out = HtmlTemplate.getHtmlWriter(res);
-			logger.info(username + " has failed to login.");
-			out.println("<h3 style='color:red'>Denied.</h3>");
-			out.println("<p>Username or password is incorrect.</p>");
+			res.setContentType("application/json");
+			res.setStatus(204);
 		}
 	}
 }

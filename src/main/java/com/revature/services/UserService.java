@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.revature.models.User;
+import com.revature.models.UserDTO;
 import com.revature.models.UserRoles;
 import com.revature.repositories.UserDAO;
 import com.revature.repositories.UserDAOImpl;
@@ -58,5 +59,16 @@ public class UserService {
 	
 	public static User findUserByUsername(String user) {
 		return repository.findUserByUsername(user);
+	}
+
+	public static UserDTO convertToDTO(User u) {
+		// TODO Auto-generated method stub
+		return new UserDTO(u.getUser_id(), 
+							u.getUsername(), 
+							u.getPassword(),
+							u.getF_name(),
+							u.getL_name(),
+							u.getEmail(),
+							u.getRole_id());
 	}
 }
