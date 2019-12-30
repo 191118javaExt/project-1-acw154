@@ -89,6 +89,11 @@
   		sessionStorage.removeItem('currentUser');
 		window.location = "http://localhost:8080/project-1/";
   	}
+  	
+  	function goBack(){
+  		window.history.back();
+  	}
+  	
   </script>
 
 
@@ -157,5 +162,5 @@
   </tbody>
 </table>
 <hr>
-<a class="btn btn-success" onclick="logout()">LOGOUT</a>
+<a class="btn btn-success" onclick="goBack()">BACK</a>
 </body>
