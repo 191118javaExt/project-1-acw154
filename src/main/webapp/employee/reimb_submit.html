@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register User</title>
-    <link rel="icon" type="image/png" href="/images/icons/reimbursement.png"/>
+    <title>Reimbursement Submission</title>
+    <link rel="icon" type="image/png" href="../images/icons/reimbursement.png"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
 		body {
-		  font-family: Arial, Helvetica, sans-serif;
-		  background-color: black;
-		}
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: url("../images/backgrounds/gradientback.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+		background-color: #fff;
+        overflow: hidden;
+        width: 100%;    
+        height: 100vh;
+    }
 		
 		* {
 		  box-sizing: border-box;
@@ -118,44 +126,76 @@
                 visibility: visible;
                 -moz-transition: visibility 0s linear .3s;
         }	
+        
+        .jumbotron {
+        padding: 30px;
+        margin-bottom: 2rem;
+        background-color: #e9ecef;
+        border-radius: 0.3rem;
+        font-size: 18pt;
+        background: #f10505; /* Old browsers */
+        background: -moz-linear-gradient(top, #fa9090 0%, #e63939 14%, #f50909 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #fa9090 0%, #e63939 14%, #f50909 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #fa9090 0%, #e63939 14%, #f50909 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0b7a1', endColorstr='#bf6e4e',GradientType=0 ); /* IE6-9 */  
+    }
+
+	
+	.jumbotron-container {
+	  width: 1170px; /* specify a width */
+	  margin: 0 auto;  /* centers the container */
+	  padding: 0 15px; /* adds some padding to the left and right*/
+	}
+	
+
+	.jumbotron h1 { 
+	  text-align: center; /* centers the heading */
+	  color: #DDD;
+	  font-family: 'Raleway', Helvetica, Arial, sans-serif;
+	  font-weight: 600;
+	  text-transform: uppercase;
+	}
 </style>
 </head>
 <body>
-
-<form action="register">
-  <div class="container">
-    <h1>Register</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
-    
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" maxlength="25" required>
-    
-    <label for="pwd"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="pwd" maxlength="25" required>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" maxlength="40" required>
-
-    <label for="fname"><b>Enter First Name</b></label>
-    <input type="text" placeholder="Enter first name" name="fname" maxlength="25"required>
-    
-    <label for="lname"><b>Enter Last Name</b></label>
-    <input type="text" placeholder="Enter Last name" name="lname" maxlength="25"required>
-    
-    <label><input type="radio" name="role" value="employee" required>Employee</label>
-  	<label><input type="radio" name="role" value="fm">Finance Manager</label>
-    
-    <hr>
-    <p>By creating an account you agree to our <a href="#" bubbletooltip="Jokes on you. We don't have one">Terms and Privacy</a>.</p>
-
-    <button type="submit" class="registerbtn">Register</button>
+<div class="jumbotron">
+    <div class="jumbotron-container">
+      <h2 id="welcome">Submit Reimbursement</h2>
+      </div>
+</div>
+<br><br><br>
+<div class="container">
+<form action="submit-reimbursement">
+  <div class="form-group row">
+    <label for="amt" class="col-sm-2 col-form-label">Amount</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="amt" placeholder="Dollar Amount" maxlength="20" required>
+    </div>
   </div>
-  
-  <div class="container signin">
-    <p>Already have an account? <a href="index.html">Sign in</a>.</p>
+  <div class="form-group row">
+    <label for="Description" class="col-sm-2 col-form-label">Description</label>
+    <div class="col-sm-10">
+      <textarea name="description" rows="5" cols="50" maxlength="250">Default Description</textarea>
+    </div>
+  </div>
+  <div class="form-row align-items-center">
+    <div class="col-auto my-1">
+      <label class="mr-sm-2" for="inlineFormCustomSelect">Reimbursement Type</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        <option selected>Choose...</option>
+        <option value="lodging">LODGING</option>
+        <option value="food">FOOD</option>
+        <option value="travel">TRAVEL</option>
+        <option value="other">OTHER</option>
+      </select>
+    </div>
+   </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">Submit Reimbursement</button>
+    </div>
   </div>
 </form>
-
+</div>
 </body>
 </html>

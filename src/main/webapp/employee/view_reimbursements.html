@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Employee Home Page</title>
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style>
+	body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: url("../images/backgrounds/gradientback.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+		background-color: #fff;
+        overflow: hidden;
+        width: 100%;    
+        height: 100vh;
+    }
+    
+    .btn-group button {
+        background-color: #4CAF50; /* Green background */
+        border: 1px solid green; /* Green border */
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        float: left; /* Float the buttons side by side */
+    }
+
+    /* Clear floats (clearfix hack) */
+    .btn-group:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .btn-group button:not(:last-child) {
+        border-right: none; /* Prevent double borders */
+    }
+
+    /* Add a background color on hover */
+    .btn-group button:hover {
+        background-color: #011301;
+    }
+
+    .jumbotron {
+        padding: 30px;
+        margin-bottom: 2rem;
+        background-color: #e9ecef;
+        border-radius: 0.3rem;
+        font-size: 18pt;
+        background: #f10505; /* Old browsers */
+        background: -moz-linear-gradient(top, #fa9090 0%, #e63939 14%, #f50909 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #fa9090 0%, #e63939 14%, #f50909 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #fa9090 0%, #e63939 14%, #f50909 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0b7a1', endColorstr='#bf6e4e',GradientType=0 ); /* IE6-9 */  
+    }
+
+	
+	.jumbotron-container {
+	  width: 1170px; /* specify a width */
+	  margin: 0 auto;  /* centers the container */
+	  padding: 0 15px; /* adds some padding to the left and right*/
+	}
+	
+
+	.jumbotron h1 { 
+	  text-align: center; /* centers the heading */
+	  color: #DDD;
+	  font-family: 'Raleway', Helvetica, Arial, sans-serif;
+	  font-weight: 600;
+	  text-transform: uppercase;
+	}
+	
+	table {
+		background-color: #fff;
+	}
+</style>
+    
+    <script>
+  	function logout() {
+  		let xhr = new XMLHttpRequest();
+
+  		xhr.open("POST", "http://localhost:8080/project-1/logout");
+  		xhr.send();
+  		
+  		sessionStorage.removeItem('currentUser');
+		window.location = "http://localhost:8080/project-1/";
+  	}
+  </script>
+
+
+
+
+</head>
+<body>
+<div class="jumbotron">
+    <div class="jumbotron-container">
+      <h2 id="welcome">Past Reimbursements</h2>
+      </div>
+</div>
+<br><br><br>
+<table class="table table-hover table-responsive">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Submit Time</th>
+      <th scope="col">Resolve Time</th>
+      <th scope="col">Receipt</th>
+      <th scope="col">Description</th>
+      <th scope="col">Author ID</th>
+      <th scope="col">Resolver ID</th>
+      <th scope="col">Status</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">100</th>
+      <td>20.20</td>
+      <td>TimeStamp</td>
+      <td>TimeStamp</td>
+      <td>Receipt</td>
+      <td>Lengthy Description</td>
+      <td>1001</td>
+      <td>1004</td>
+      <td>PENDING</td>
+      <td>LODGING</td>
+    </tr>
+    <tr>
+      <th scope="row">100</th>
+      <td>40.20</td>
+      <td>TimeStamp</td>
+      <td>TimeStamp</td>
+      <td>Receipt</td>
+      <td>Lengthy Description</td>
+      <td>1001</td>
+      <td>1004</td>
+      <td>APPROVED</td>
+      <td>FOOD</td>
+    </tr>
+    <tr>
+      <th scope="row">100</th>
+      <td>20.40</td>
+      <td>TimeStamp</td>
+      <td>TimeStamp</td>
+      <td>Receipt</td>
+      <td>Lengthy Description</td>
+      <td>1001</td>
+      <td>1004</td>
+      <td>PENDING</td>
+      <td>OTHER</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<a class="btn btn-success" onclick="logout()">LOGOUT</a>
+</body>
