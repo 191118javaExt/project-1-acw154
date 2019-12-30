@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FinanceManager Home Page</title>
-    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
     
@@ -81,15 +81,17 @@
     </div>
     <script>
 		let welcome = document.getElementById('welcome');
+		console.log(sessionStorage.getItem('currentUser'));
 		let userString = sessionStorage.getItem('currentUser');
 		if(userString === null) {
 			window.location = "http://localhost:8080/project-1/";
 		} else {
+			console.log(userString);
 			let currentUser = JSON.parse(userString);
 			console.log(currentUser);
 			if(currentUser != null) {
-				welcome.innerHTML = "Welcome " + currentUser.firstName + " "
-					+ currentUser.lastName;
+				welcome.innerHTML = "Welcome " + currentUser.f_name + " "
+					+ currentUser.l_name;
 			}
 		}
     </script>

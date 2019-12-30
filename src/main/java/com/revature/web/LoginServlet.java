@@ -57,15 +57,6 @@ BufferedReader reader = req.getReader();
 			out.println(om.writeValueAsString(uDTO));
 			
 			logger.info(username + " has successfully logged in");
-			if(u.getRole_id() == 1) {
-				RequestDispatcher rd = req.getRequestDispatcher("employee/home.html");
-				rd.forward(req, res);
-				logger.info(username + " has successfully logged in");
-			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("fm/home.html");
-				rd.forward(req, res);
-				logger.info(username + " has successfully logged in");
-			}
 		} else {
 			res.setContentType("application/json");
 			res.setStatus(204);

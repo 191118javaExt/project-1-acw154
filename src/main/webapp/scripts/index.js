@@ -9,10 +9,10 @@ function sendLogin() {
 	};
 
 	let xhr = new XMLHttpRequest();
-
 	xhr.onreadystatechange = function() {
 
 		if(this.readyState === 4 && this.status === 200) {
+			console.log(this.responseText);
 			sessionStorage.setItem('currentUser', this.responseText);
 			if(sessionStorage.getItem("role_id") == 1){
 				window.location = "http://localhost:8080/project-1/employee/home.html";
@@ -25,6 +25,7 @@ function sendLogin() {
 			alert("Failed to login! Username or password is incorrect.");
 		}
 	};
+	
 	
 	xhr.open("POST", "http://localhost:8080/project-1/login");
 	xhr.send(JSON.stringify(loginTemplate));

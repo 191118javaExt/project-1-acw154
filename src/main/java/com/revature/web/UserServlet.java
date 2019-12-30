@@ -20,7 +20,7 @@ public class UserServlet extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5502233850428693998L;
+	private static final long serialVersionUID = 1L;
 	private static ObjectMapper om = new ObjectMapper();
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
