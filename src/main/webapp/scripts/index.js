@@ -59,3 +59,40 @@ function sendFMLogin(){
 	xhr.open("POST", "http://localhost:8080/project-1/fmlogin");
 	xhr.send(JSON.stringify(loginTemplate));
 }
+
+function registerUser(){
+	console.log("registerUser started.");
+	let registerForm = document.registerForm;
+	let username = registerForm.username.value;
+	let password = registerForm.password.value;
+	let email = registerForm.email.value;
+	let fname = registerForm.fname.value;
+	let lname = registerForm.lname.value;
+	let role = registerForm.role.value;
+	let registerTemplate = {
+			username: username,
+			password: password,
+			email: email,
+			fname: fname,
+			lname: lname,
+			role: role
+	};
+
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+
+		if(this.readyState === 4 && this.status === 200) {
+			console.log(this.responseText);
+			alert("User Account created")
+			//window.location = "http://localhost:8080/project-1/";
+		}
+		
+		if(this.readyState === 4 && this.status === 204) {
+			alert("Failed to Register User, Username already exists");
+		}
+	};
+	
+	
+	xhr.open("POST", "http://localhost:8080/project-1/register");
+	xhr.send(JSON.stringify(registerTemplate));
+}
