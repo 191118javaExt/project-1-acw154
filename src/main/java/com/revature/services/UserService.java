@@ -49,6 +49,18 @@ public class UserService {
 		return null;
 	}
 	
+	public static boolean verifyEmployee(String username) {
+		List<User> list = repository.findUsersByRole(UserRoles.EMPLOYEE);
+		if(!list.isEmpty()) {
+			for(User u: list) {
+				if(u.getUsername().equals(username)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public static boolean verifyUniqueUser(String username) {
 		if(repository.findUserByUsername(username) == null) {
 			return true;

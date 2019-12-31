@@ -21,6 +21,16 @@
   </servlet-mapping>
   
   <servlet>
+  	<servlet-name>FMLoginServlet</servlet-name>
+  	<servlet-class>com.revature.web.FMLoginServlet</servlet-class>	
+  </servlet>
+  	
+  <servlet-mapping>
+  	<servlet-name>FMLoginServlet</servlet-name>
+  	<url-pattern>/fmlogin</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
   	<servlet-name>UserServlet</servlet-name>
   	<servlet-class>com.revature.web.UserServlet</servlet-class>
   </servlet>

@@ -20,9 +20,9 @@ import com.revature.models.UserDTO;
 import com.revature.models.UserRoles;
 import com.revature.services.UserService;
 
-public class LoginServlet extends HttpServlet {
+public class FMLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger(LoginServlet.class);
+	private static Logger logger = Logger.getLogger(FMLoginServlet.class);
 	private static ObjectMapper om = new ObjectMapper();
 
 	@Override
@@ -45,7 +45,7 @@ BufferedReader reader = req.getReader();
 		
 		logger.info("User attempted to login with username " + username);
 		User u = UserService.verifyUser(username, password);
-		if(u != null && UserService.verifyEmployee(u.getUsername())) {
+		if(u != null && !UserService.verifyEmployee(u.getUsername())) {
 			HttpSession session = req.getSession();
 			// Gets the current session, or creates one if it did not exist
 			session.setAttribute("username", username);
@@ -53,7 +53,7 @@ BufferedReader reader = req.getReader();
 			res.setContentType("application/json");
 			UserDTO uDTO = UserService.convertToDTO(u);
 			out.println(om.writeValueAsString(uDTO));
-			logger.info("Employee" + username + " has successfully logged in");
+			logger.info("FM " + username + " has successfully logged in");
 		} else {
 			res.setContentType("application/json");
 			res.setStatus(204);
