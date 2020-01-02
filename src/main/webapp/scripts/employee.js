@@ -5,6 +5,8 @@ function toSubmit(){
 function toView(){
 	console.log("toView started");
 	window.location = "http://localhost:8080/project-1/employee/view_reimbursements.html";
+	
+	
 }
 function submitReimbursement(){
 	console.log("submitReimbursement started.");

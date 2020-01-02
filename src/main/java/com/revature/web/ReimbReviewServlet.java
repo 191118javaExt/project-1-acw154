@@ -66,7 +66,7 @@ public class ReimbReviewServlet extends HttpServlet{
 					if(ReimbursementService.denyReimbursement(reimb_id, user_id)) {
 						logger.info("Denied Reimbursement " + reimb_id);	
 						res.setContentType("application/json");
-						res.setStatus(210);
+						res.setStatus(200);
 					} else {
 						logger.warn("Reimbursement could not be denied");	
 						res.setContentType("application/json");

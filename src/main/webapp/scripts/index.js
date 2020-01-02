@@ -86,7 +86,9 @@ function registerUser(){
 			alert("User Account created")
 			//window.location = "http://localhost:8080/project-1/";
 		}
-		
+		if(this.readyState === 4 && this.status === 210){
+			alert("A database error occurred while trying to register");
+		}
 		if(this.readyState === 4 && this.status === 204) {
 			alert("Failed to Register User, Username already exists");
 		}

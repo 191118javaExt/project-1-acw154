@@ -58,7 +58,7 @@ BufferedReader reader = req.getReader();
 						+ registerAttempt.getPassword());
 			} else {
 				res.setContentType("application/json");
-				res.setStatus(204);
+				res.setStatus(210);
 			}
 			// Gets the current session, or creates one if it did not exist
 			//session.setAttribute("username", username);
