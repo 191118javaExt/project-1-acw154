@@ -22,7 +22,11 @@ function reviewReimbursement(){
 
 		if(this.readyState === 4 && this.status === 200) {
 			console.log(this.responseText);
-			alert("Review Submitted");
+			alert("Reimbursement " + reimb_id + "has been approved");
+		}
+		
+		if(this.readyState === 4 && this.status === 210) {
+			alert("Reimbursement " + reimb_id + "has been denied");
 		}
 		
 		if(this.readyState === 4 && this.status === 204) {

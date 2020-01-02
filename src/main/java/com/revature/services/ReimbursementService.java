@@ -34,11 +34,11 @@ public class ReimbursementService {
 		return repository.approveReimbursement(reimb_id, resolvr_id);
 	}
 	
-	public boolean denyReimbursement(int reimb_id, int resolvr_id) {
+	public static boolean denyReimbursement(int reimb_id, int resolvr_id) {
 		return repository.denyReimbursement(reimb_id, resolvr_id);
 	}
 	
-	public List<Reimbursement> findReimbursementsByAuthor(int author_id){
+	public static List<Reimbursement> findReimbursementsByAuthor(int author_id){
 		return repository.findReimbursementsByAuthor(author_id);
 	}
 	

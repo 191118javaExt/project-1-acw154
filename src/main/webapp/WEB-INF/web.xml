@@ -71,7 +71,15 @@
   	<url-pattern>/submit_reimb</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>ReimbReviewServlet</servlet-name>
+  	<servlet-class>com.revature.web.ReimbReviewServlet</servlet-class>
+  </servlet>
   
+  <servlet-mapping>
+  	<servlet-name>ReimbReviewServlet</servlet-name>
+  	<url-pattern>/review_reimb</url-pattern>
+  </servlet-mapping>
   
   
   
