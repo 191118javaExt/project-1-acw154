@@ -1,6 +1,7 @@
 package com.revature.web;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -11,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.LoginTemplate;
@@ -22,7 +24,7 @@ import com.revature.services.UserService;
 
 public class FMLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger(FMLoginServlet.class);
+	private static Logger logger = LogManager.getLogger(FMLoginServlet.class);
 	private static ObjectMapper om = new ObjectMapper();
 
 	@Override

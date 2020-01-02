@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.LoginTemplate;
@@ -22,7 +23,7 @@ import com.revature.services.UserService;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger(LoginServlet.class);
+	private static Logger logger = LogManager.getLogger(LoginServlet.class);
 	private static ObjectMapper om = new ObjectMapper();
 
 	@Override
@@ -54,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 			res.setContentType("application/json");
 			UserDTO uDTO = UserService.convertToDTO(u);
 			out.println(om.writeValueAsString(uDTO));
-			logger.info("Employee" + username + " has successfully logged in");
+			logger.info("Employee " + username + " has successfully logged in");
 		} else {
 			res.setContentType("application/json");
 			res.setStatus(204);

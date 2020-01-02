@@ -6,11 +6,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
+
 
 public class ConnectionUtil {
 	
-	private static Logger logger = Logger.getLogger(ConnectionUtil.class);
+	private static Logger logger = LogManager.getLogger(ConnectionUtil.class);
 
 	public static Connection getConnection() {
 		

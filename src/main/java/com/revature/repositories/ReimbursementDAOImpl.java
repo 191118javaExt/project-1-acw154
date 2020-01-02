@@ -9,14 +9,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementStatus;
 import com.revature.util.ConnectionUtil;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO{
-	private static Logger logger = Logger.getLogger(ReimbursementDAOImpl.class);
+	private static Logger logger = LogManager.getLogger(ReimbursementDAOImpl.class);
 
 	@Override
 	public Reimbursement findReimbursement(int reimb_id) {

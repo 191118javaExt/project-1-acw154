@@ -7,14 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.revature.models.User;
 import com.revature.models.UserRoles;
 import com.revature.util.ConnectionUtil;
 
 public class UserDAOImpl implements UserDAO{
-	private static Logger logger = Logger.getLogger(UserDAOImpl.class);
+	private static Logger logger = LogManager.getLogger(UserDAOImpl.class);
 	
 	@Override
 	public User findUser(int user_id) {

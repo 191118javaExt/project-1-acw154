@@ -14,8 +14,7 @@ function submitReimbursement(){
 	let reimb_type = submitForm.reimb_type.value;
 	let receipt = submitForm.receipt.value;
 	let submitTemplate = {
-			username: username,
-			password: password,
+			amount: amount,
 			description: description,
 			reimb_type: reimb_type,
 			receipt: receipt
