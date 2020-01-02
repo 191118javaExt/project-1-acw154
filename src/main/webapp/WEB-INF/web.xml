@@ -60,4 +60,19 @@
   	<servlet-name>RegisterServlet</servlet-name>
   	<url-pattern>/register</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ReimbSubmitServlet</servlet-name>
+  	<servlet-class>com.revature.web.ReimbSubmitServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>ReimbSubmitServlet</servlet-name>
+  	<url-pattern>/submit_reimb</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
 </web-app>

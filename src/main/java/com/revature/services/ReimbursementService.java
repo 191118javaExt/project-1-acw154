@@ -10,27 +10,27 @@ import com.revature.repositories.ReimbursementDAOImpl;
 public class ReimbursementService {
 	private static ReimbursementDAO repository = new ReimbursementDAOImpl();
 	
-	public Reimbursement findReimbursement(int reimb_id) {
+	public static Reimbursement findReimbursement(int reimb_id) {
 		return repository.findReimbursement(reimb_id);
 	}
 	
-	public List<Reimbursement> findReimbursementsByStatus(ReimbursementStatus status){
+	public static List<Reimbursement> findReimbursementsByStatus(ReimbursementStatus status){
 		return repository.findReimbursementsByStatus(status);
 	}
 	
-	public List<Reimbursement> findAllReimbursements(){
+	public static List<Reimbursement> findAllReimbursements(){
 		return repository.findAllReimbursements();
 	}
 	
-	public boolean submitReimbursement(Reimbursement reimb) {
+	public static boolean submitReimbursement(Reimbursement reimb) {
 		return repository.submitReimbursement(reimb);
 	}
 	
-	public boolean deleteReimbursement(int reimb_id) {
+	public static boolean deleteReimbursement(int reimb_id) {
 		return repository.deleteReimbursement(reimb_id);
 	}
 	
-	public boolean approveReimbursement(int reimb_id, int resolvr_id) {
+	public static boolean approveReimbursement(int reimb_id, int resolvr_id) {
 		return repository.approveReimbursement(reimb_id, resolvr_id);
 	}
 	

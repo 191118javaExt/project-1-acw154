@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Employee Home Page</title>
+    <script src="../scripts/employee.js"></script>
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
@@ -112,11 +113,11 @@
         <br>
         <div class=.container-fluid>
             <div class="btn-group" style="width:100%">
-                <form action="employee_submission">
-                    <button style="width:50%">Submit New Reimbursement</button>
+                <form>
+                    <button style="width:50%" onclick="toSubmit(event.preventDefault())">Submit New Reimbursement</button>
                 </form>
-                <form action="view_reimbursements">
-                    <button style="width:50%">View Reimbursements</button>
+                <form>
+                    <button style="width:50%" onclick="toView(event.preventDefault())">View Reimbursements</button>
                 </form>
             </div>
             <hr>

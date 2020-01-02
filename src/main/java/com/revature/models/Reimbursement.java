@@ -44,6 +44,19 @@ public class Reimbursement {
 		this.status_id = status_id;
 		this.type_id = type_id;
 	}
+	
+	
+
+
+	public Reimbursement(double amount, String desc, int author_id,
+			int status_id, int type_id) {
+		super();
+		this.amount = amount;
+		this.desc = desc;
+		this.author_id = author_id;
+		this.status_id = status_id;
+		this.type_id = type_id;
+	}
 
 
 	public int getReimb_id() {

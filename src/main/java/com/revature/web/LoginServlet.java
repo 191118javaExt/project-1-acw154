@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 		throws ServletException, IOException {
-BufferedReader reader = req.getReader();
+		BufferedReader reader = req.getReader();
 		
 		StringBuilder s = new StringBuilder();
 		String line = reader.readLine();
@@ -49,6 +49,7 @@ BufferedReader reader = req.getReader();
 			HttpSession session = req.getSession();
 			// Gets the current session, or creates one if it did not exist
 			session.setAttribute("username", username);
+			session.setAttribute("user_id", u.getUser_id());
 			PrintWriter out = res.getWriter();
 			res.setContentType("application/json");
 			UserDTO uDTO = UserService.convertToDTO(u);
