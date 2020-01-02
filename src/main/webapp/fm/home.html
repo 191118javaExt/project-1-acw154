@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FinanceManager Home Page</title>
+    <script src="../scripts/fm.js"></script>
     <link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
@@ -100,11 +101,11 @@
         <br>
         <div class=.container-fluid>
             <div class="btn-group" style="width:100%">
-                <form action="fm_review_reimb">
-                    <button style="width:50%">Approve/Deny Reimbursement</button>
+                <form>
+                    <button style="width:50%" onclick="toReview(event.preventDefault())">Approve/Deny Reimbursement</button>
                 </form>
-                <form action="view_reimbursements">
-                    <button style="width:50%">View All Reimbursements</button>
+                <form>
+                    <button style="width:50%" onclick="toView(event.preventDefault())">View All Reimbursements</button>
                 </form>
             </div>
             <br><br>
