@@ -95,8 +95,7 @@
   	}
   	
   </script>
-
-
+  
 
 
 </head>
@@ -107,7 +106,7 @@
       </div>
 </div>
 <br><br><br>
-<table class="table table-hover table-responsive">
+<table class="table table-hover table-responsive" id="reimb-table">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -116,51 +115,44 @@
       <th scope="col">Resolve Time</th>
       <th scope="col">Receipt</th>
       <th scope="col">Description</th>
-      <th scope="col">Author ID</th>
       <th scope="col">Resolver ID</th>
       <th scope="col">Status</th>
       <th scope="col">Type</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">100</th>
-      <td>20.20</td>
-      <td>TimeStamp</td>
-      <td>TimeStamp</td>
-      <td>Receipt</td>
-      <td>Lengthy Description</td>
-      <td>1001</td>
-      <td>1004</td>
-      <td>PENDING</td>
-      <td>LODGING</td>
-    </tr>
-    <tr>
-      <th scope="row">100</th>
-      <td>40.20</td>
-      <td>TimeStamp</td>
-      <td>TimeStamp</td>
-      <td>Receipt</td>
-      <td>Lengthy Description</td>
-      <td>1001</td>
-      <td>1004</td>
-      <td>APPROVED</td>
-      <td>FOOD</td>
-    </tr>
-    <tr>
-      <th scope="row">100</th>
-      <td>20.40</td>
-      <td>TimeStamp</td>
-      <td>TimeStamp</td>
-      <td>Receipt</td>
-      <td>Lengthy Description</td>
-      <td>1001</td>
-      <td>1004</td>
-      <td>PENDING</td>
-      <td>OTHER</td>
-    </tr>
+  <tbody id="reimb-body">
+   	
+    
   </tbody>
 </table>
 <hr>
 <a class="btn btn-success" onclick="goBack()">BACK</a>
 </body>
+<script>
+  	let reimb_body = document.getElementById('reimb-body');
+  	console.log(reimb_body)
+	let userString = sessionStorage.getItem('currentUser'); 
+	if(userString === null) {
+		window.location = "http://localhost:8080/project-1/"; // redirect back to the initial html 
+	} else {
+		let reimbString = sessionStorage.getItem("reimb_list");
+		let reimb_list = JSON.parse(reimbString);
+		console.log(reimb_list);
+		for(reimb in reimb_list) {
+				var row = document.createElement('tr');
+				row.innerHTML = '<td>' + reimb_list[reimb].reimb_id + '</td>' +
+				'<td>' + reimb_list[reimb].amount + '</td>' +
+				'<td>' + reimb_list[reimb].submitted + '</td>' +
+				'<td>' + reimb_list[reimb].resolved + '</td>' +
+				'<td>' + reimb_list[reimb].receipt + '</td>' +
+				'<td>' + reimb_list[reimb].desc + '</td>' +
+				'<td>' + reimb_list[reimb].resolver_id + '</td>' +
+				'<td>' + reimb_list[reimb].status_id + '</td>' +
+				'<td>' + reimb_list[reimb].type_id + '</td>';
+				reimb_body.appendChild(row);
+		};
+			
+			
+	}
+  </script>
+</html>

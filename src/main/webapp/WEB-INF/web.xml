@@ -81,6 +81,25 @@
   	<url-pattern>/review_reimb</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>ReimbViewServlet</servlet-name>
+  	<servlet-class>com.revature.web.ReimbViewServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>ReimbViewServlet</servlet-name>
+  	<url-pattern>/view_reimb</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>FMReimbViewServlet</servlet-name>
+  	<servlet-class>com.revature.web.FMReimbViewServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>FMReimbViewServlet</servlet-name>
+  	<url-pattern>/fm_view_reimb</url-pattern>
+  </servlet-mapping>
   
   
 </web-app>

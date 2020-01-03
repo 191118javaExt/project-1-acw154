@@ -4,7 +4,22 @@ function toReview(){
 }
 function toView(){
 	console.log("toView started");
-	window.location = "http://localhost:8080/project-1/fm/view_reimbursements.html";
+	
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(this.readyState === 4 && this.status === 200){
+			sessionStorage.setItem("reimb_list", this.responseText);
+			let reimbString = sessionStorage.getItem("reimb_list");
+			let reimb_list = JSON.parse(reimbString);
+			window.location = "http://localhost:8080/project-1/fm/view_reimbursements.html";
+		}
+		if(this.readyState ===4 && this.status === 204){
+			alert("There are no reimbursements");
+		}
+	}
+	
+	xhr.open("GET", "http://localhost:8080/project-1/fm_view_reimb");
+	xhr.send();
 }
 function reviewReimbursement(){
 	console.log("ReviewReimbursement started");
