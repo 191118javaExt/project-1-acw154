@@ -149,18 +149,18 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	public boolean submitReimbursement(Reimbursement reimb) {
 		try(Connection conn = ConnectionUtil.getConnection()){
 			String query = "INSERT INTO project1.ers_reimbursement" + 
-					" (reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_receipt, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)" + 
-					" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+					" (reimb_amount, reimb_description, reimb_receipt, reimb_author, reimb_status_id, reimb_type_id)" + 
+					" VALUES(?, ?, ?, ?, ?, ?);";
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setDouble(1, reimb.getAmount());
-			stmt.setTimestamp(2, Timestamp.valueOf(reimb.getSubmitted()));
-			stmt.setTimestamp(3, Timestamp.valueOf(reimb.getResolved()));
-			stmt.setString(4, reimb.getDesc());
-			stmt.setBytes(5, reimb.getReceipt());
-			stmt.setInt(6, reimb.getAuthor_id());
-			stmt.setInt(7, reimb.getResolver_id());
-			stmt.setInt(8, reimb.getStatus_id());
-			stmt.setInt(9, reimb.getType_id());
+			//stmt.setTimestamp(2, Timestamp.valueOf(reimb.getSubmitted()));
+			//stmt.setTimestamp(3, Timestamp.valueOf(reimb.getResolved()));
+			stmt.setString(2, reimb.getDesc());
+			stmt.setBytes(3, reimb.getReceipt());
+			stmt.setInt(4, reimb.getAuthor_id());
+			//stmt.setInt(7, reimb.getResolver_id());
+			stmt.setInt(5, 0);
+			stmt.setInt(6, reimb.getType_id());
 			if(!stmt.execute()){
 				return true;
 			}

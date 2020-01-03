@@ -1,15 +1,21 @@
 package com.revature.web;
 
 import java.io.BufferedReader;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,11 +45,20 @@ public class ReimbSubmitServlet extends HttpServlet{
 			s.append(line);
 			line = reader.readLine();
 		}
-		
 		String body = s.toString();
 		System.out.println(body);
-		SubmitTemplate submitTemplate = om.readValue(body, SubmitTemplate.class);
-		
+		String[] params = StringUtils.substringsBetween(body, "=", "-");
+		List<String> values = new ArrayList<String>();
+		for(String str: params) {
+			values.add(StringUtils.substringAfterLast(str, "\""));
+		}
+		System.out.println(values);
+		//SubmitTemplate submitTemplate = om.readValue(body, SubmitTemplate.class);
+		SubmitTemplate submitTemplate = new SubmitTemplate(values.get(0), 
+													values.get(1),
+													values.get(2),
+													values.get(3));
+		System.out.println(submitTemplate);
 		try{
 			Double amount = Double.parseDouble(submitTemplate.getAmount());
 			String description = submitTemplate.getDescription();

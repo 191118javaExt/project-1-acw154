@@ -51,6 +51,7 @@ BufferedReader reader = req.getReader();
 			HttpSession session = req.getSession();
 			// Gets the current session, or creates one if it did not exist
 			session.setAttribute("username", username);
+			session.setAttribute("user_id", u.getUser_id());
 			PrintWriter out = res.getWriter();
 			res.setContentType("application/json");
 			UserDTO uDTO = UserService.convertToDTO(u);

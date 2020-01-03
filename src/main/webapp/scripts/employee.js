@@ -10,17 +10,15 @@ function toView(){
 }
 function submitReimbursement(){
 	console.log("submitReimbursement started.");
+	let fd = new FormData();
 	let submitForm = document.submitForm;
 	let amount = submitForm.amount.value;
 	let description = submitForm.description.value;
 	let reimb_type = submitForm.reimb_type.value;
-	let receipt = submitForm.receipt.value;
-	let submitTemplate = {
-			amount: amount,
-			description: description,
-			reimb_type: reimb_type,
-			receipt: receipt
-	};
+	fd.append("amount", submitForm.amount.value);
+	fd.append("description", submitForm.description.value);
+	fd.append("reimb_type", submitForm.reimb_type.value);
+	fd.append("receipt", submitForm.receipt.value);
 
 	let xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -38,5 +36,5 @@ function submitReimbursement(){
 	
 	
 	xhr.open("POST", "http://localhost:8080/project-1/submit_reimb");
-	xhr.send(JSON.stringify(submitTemplate));
+	xhr.send(JSON.stringify(fd));
 }

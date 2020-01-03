@@ -50,28 +50,41 @@ public class ReimbReviewServlet extends HttpServlet{
 			ReimbursementStatus status = ReimbursementStatus.valueOf(reviewAttempt.getReimb_status());
 			HttpSession session = req.getSession();
 			int user_id = Integer.parseInt(session.getAttribute("user_id").toString());
-			switch(status) {
-				case APPROVED: {
-					if(ReimbursementService.approveReimbursement(reimb_id, user_id)){
-						logger.info("Approved Reimbursement " + reimb_id);	
-						res.setContentType("application/json");
-						res.setStatus(200);
-					} else {
-						logger.warn("Reimbursement could not be approved");	
-						res.setContentType("application/json");
-						res.setStatus(204);
+			if(ReimbursementService.findReimbursement(reimb_id) == null) {
+				logger.warn("Reimbursement does not exist");
+				res.setContentType("application/json");
+				res.setStatus(204);
+			} else {
+				switch(status) {
+					case APPROVED: {
+						if(ReimbursementService.approveReimbursement(reimb_id, user_id)){
+							logger.info("Approved Reimbursement " + reimb_id);	
+							res.setContentType("application/json");
+							res.setStatus(200);
+						} else {
+							logger.warn("Reimbursement could not be approved");	
+							res.setContentType("application/json");
+							res.setStatus(204);
+						}
+						break;
 					}
-				}
-				case DENIED: {
-					if(ReimbursementService.denyReimbursement(reimb_id, user_id)) {
-						logger.info("Denied Reimbursement " + reimb_id);	
-						res.setContentType("application/json");
-						res.setStatus(200);
-					} else {
-						logger.warn("Reimbursement could not be denied");	
-						res.setContentType("application/json");
-						res.setStatus(204);
+					
+					case DENIED: {
+						if(ReimbursementService.denyReimbursement(reimb_id, user_id)) {
+							logger.info("Denied Reimbursement " + reimb_id);	
+							res.setContentType("application/json");
+							res.setStatus(200);
+						} else {
+							logger.warn("Reimbursement could not be denied");	
+							res.setContentType("application/json");
+							res.setStatus(204);
+						}
+						break;
 					}
+				case PENDING:
+					break;
+				default:
+					break;
 				}
 			}
 		} catch (NumberFormatException e) {
