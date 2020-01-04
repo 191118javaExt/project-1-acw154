@@ -146,12 +146,14 @@
 		console.log(reimb_list);
 		for(reimb in reimb_list) {
 				var row = document.createElement('tr');
-				row.innerHTML = '<td>' + reimb_list[reimb].reimb_id + '</td>' +
+				row.innerHTML = 
+				'<td>' + reimb_list[reimb].reimb_id + '</td>' +
 				'<td>' + reimb_list[reimb].amount + '</td>' +
 				'<td>' + reimb_list[reimb].submitted + '</td>' +
 				'<td>' + reimb_list[reimb].resolved + '</td>' +
 				'<td>' + reimb_list[reimb].receipt + '</td>' +
 				'<td>' + reimb_list[reimb].desc + '</td>' +
+				'<td>' + reimb_list[reimb].author_id + '</td>' +
 				'<td>' + reimb_list[reimb].resolver_id + '</td>' +
 				'<td>' + reimb_list[reimb].status_id + '</td>' +
 				'<td>' + reimb_list[reimb].type_id + '</td>';

@@ -47,10 +47,14 @@ public class ReimbViewServlet extends HttpServlet{
 				List<ReimbursementDTO> dtoList = new ArrayList<>();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 				for(Reimbursement re: list) {
+					String formatResolved = "";
+					if(re.getResolved() != null) {
+						formatResolved = re.getResolved().format(formatter);
+					}
 					dtoList.add(new ReimbursementDTO(re.getReimb_id(), 
 														re.getAmount(),
 														re.getSubmitted().format(formatter),
-														re.getResolved().format(formatter),
+														formatResolved,
 														re.getReceipt(),
 														re.getDesc(),
 														re.getAuthor_id(),
