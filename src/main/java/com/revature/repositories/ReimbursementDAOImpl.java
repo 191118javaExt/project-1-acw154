@@ -66,7 +66,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	public List<Reimbursement> findReimbursementsByStatus(ReimbursementStatus status) {
 		List<Reimbursement> list = new ArrayList<>();
 		try(Connection conn = ConnectionUtil.getConnection()){
-			String query = "SELECT * FROM project1.ers_reimbursement WHERE reimb_status = (?);";
+			String query = "SELECT * FROM project1.ers_reimbursement WHERE reimb_status = (?) ORDER BY reimb_submitted DESC;";
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, status.getValue());
 			ResultSet rs = stmt.executeQuery();
@@ -108,7 +108,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	public List<Reimbursement> findAllReimbursements() {
 		List<Reimbursement> list = new ArrayList<>();
 		try(Connection conn = ConnectionUtil.getConnection()){
-			String query = "SELECT * FROM project1.ers_reimbursement;";
+			String query = "SELECT * FROM project1.ers_reimbursement ORDER BY reimb_submitted DESC;";
 			PreparedStatement stmt = conn.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
@@ -189,7 +189,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	public List<Reimbursement> findReimbursementsByAuthor(int a_id) {
 		List<Reimbursement> list = new ArrayList<>();
 		try(Connection conn = ConnectionUtil.getConnection()){
-			String query = "SELECT * FROM project1.ers_reimbursement WHERE reimb_author = (?);";
+			String query = "SELECT * FROM project1.ers_reimbursement WHERE reimb_author = (?) ORDER BY reimb_submitted DESC;";
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, a_id);
 			ResultSet rs = stmt.executeQuery();

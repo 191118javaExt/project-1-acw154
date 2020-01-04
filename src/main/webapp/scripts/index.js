@@ -84,6 +84,7 @@ function registerUser(){
 		if(this.readyState === 4 && this.status === 200) {
 			console.log(this.responseText);
 			alert("User Account created")
+			registerForm.reset();
 			//window.location = "http://localhost:8080/project-1/";
 		}
 		if(this.readyState === 4 && this.status === 210){

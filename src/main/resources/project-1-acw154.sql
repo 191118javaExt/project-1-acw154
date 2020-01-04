@@ -109,4 +109,3 @@ FOR EACH row
 --DROP TRIGGER set_resolved_time on ers_reimbursement;
 
 --UPDATE ers_reimbursement SET reimb_status_id = 0, reimb_resolver = null WHERE reimb_id= 1;
-

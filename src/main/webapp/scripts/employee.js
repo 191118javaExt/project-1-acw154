@@ -41,6 +41,7 @@ function submitReimbursement(){
 		if(this.readyState === 4 && this.status === 200) {
 			console.log(this.responseText);
 			alert("Reimbursement Submitted");
+			submitForm.reset();
 		}
 		
 		if(this.readyState === 4 && this.status === 204) {
