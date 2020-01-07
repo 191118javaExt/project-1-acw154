@@ -34,7 +34,9 @@ function submitReimbursement(){
 	fd.append("reimb_type", submitForm.reimb_type.value);
 	//fd.append("receipt", submitForm.receipt.value);
 	//let receipt = getBase64Image(submitForm.receipt.value);
-	var file = submitForm.receipt.files[0];
+	//var file = submitForm.receipt.files[0];
+	console.log(sessionStorage.getItem('receiptArray'));
+	fd.append("receipt", sessionStorage.getItem('receiptArray'));
 	/*var fileReader = new FileReader();
 	if (fileReader && file) {
 		fileReader.readAsArrayBuffer(file);
@@ -91,7 +93,7 @@ function getBase64(file) {
 function getByteArray(file) {
 	   var fileReader = new FileReader();
 	   if (fileReader && file) {     
-	      fileReader.onload = function () {
+	      fileReader.onloadend = function () {
 	         var imageData = fileReader.result;
 	         console.log(imageData);
 	         return imageData;
