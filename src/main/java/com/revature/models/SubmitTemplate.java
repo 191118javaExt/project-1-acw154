@@ -4,13 +4,13 @@ public class SubmitTemplate {
 	private String amount;
 	private String description;
 	private String reimb_type;
-	private String receipt;
+	private byte[] receipt;
 	
 	public SubmitTemplate() {
 		super();
 	}
 
-	public SubmitTemplate(String amount, String description, String reimb_type, String receipt) {
+	public SubmitTemplate(String amount, String description, String reimb_type, byte[] receipt) {
 		super();
 		this.amount = amount;
 		this.description = description;
@@ -42,11 +42,11 @@ public class SubmitTemplate {
 		this.reimb_type = reimb_type;
 	}
 
-	public String getReceipt() {
+	public byte[] getReceipt() {
 		return receipt;
 	}
 
-	public void setReceipt(String receipt) {
+	public void setReceipt(byte[] receipt) {
 		this.receipt = receipt;
 	}
 

@@ -32,8 +32,28 @@ function submitReimbursement(){
 	fd.append("amount", submitForm.amount.value);
 	fd.append("description", submitForm.description.value);
 	fd.append("reimb_type", submitForm.reimb_type.value);
-	fd.append("receipt", submitForm.receipt.value);
-	let receipt = getBase64Image(submitForm.receipt.value);
+	//fd.append("receipt", submitForm.receipt.value);
+	//let receipt = getBase64Image(submitForm.receipt.value);
+	var file = submitForm.receipt.files[0];
+	/*var fileReader = new FileReader();
+	if (fileReader && file) {
+		fileReader.readAsArrayBuffer(file);
+	    fileReader.onload = function () {
+	    	var imageData = fileReader.result;
+	    	console.log(imageData);
+	    };
+	    
+	}
+	done = false;
+	while(!done){
+		if(fileReader.readyState === 2){
+			fd.append("receipt", fileReader.result);
+			done = true;
+		}
+	}*/
+	for (var pair of fd.entries()) {
+	    console.log(pair[0]+ ', ' + pair[1]); 
+	}
 	
 	let xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -55,36 +75,28 @@ function submitReimbursement(){
 	xhr.send(fd);
 }
 
-function getBase64Image(img) {
-    // Create an empty canvas element
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
 
-    // Copy the image contents to the canvas
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
 
-    // Get the data-URL formatted image
-    // Firefox supports PNG and JPEG. You could check img.src to
-    // guess the original format, but be aware the using "image/jpg"
-    // will re-encode the image.
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+function getBase64(file) {
+	   var reader = new FileReader();
+	   reader.readAsDataURL(file);
+	   reader.onload = function () {
+	     return reader.result;
+	   };
+	   reader.onerror = function (error) {
+	     console.log('Error: ', error);
+	   };
 }
 
-
-function getBase64Image(img){     
-	var p;
-	var canvas = document.createElement("canvas");
-	var img1=document.createElement("img"); 
-    img1.setAttribute('src', img); 
-    canvas.width = img1.width; 
-    canvas.height = img1.height; 
-    var ctx = canvas.getContext("2d"); 
-    ctx.drawImage(img1, 0, 0); 
-    var dataURL = canvas.toDataURL("image/png");
-    alert("from getbase64 function"+dataURL );    
-    return dataURL;
-} 
+function getByteArray(file) {
+	   var fileReader = new FileReader();
+	   if (fileReader && file) {     
+	      fileReader.onload = function () {
+	         var imageData = fileReader.result;
+	         console.log(imageData);
+	         return imageData;
+	      };
+	      fileReader.readAsArrayBuffer(file);
+	   }
+	}
+	

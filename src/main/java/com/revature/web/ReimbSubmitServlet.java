@@ -57,19 +57,20 @@ public class ReimbSubmitServlet extends HttpServlet{
 		SubmitTemplate submitTemplate = new SubmitTemplate(values.get(0), 
 													values.get(1),
 													values.get(2),
-													values.get(3));
+													values.get(3).getBytes());
 		System.out.println(submitTemplate);
 		try{
 			Double amount = Double.parseDouble(submitTemplate.getAmount());
 			String description = submitTemplate.getDescription();
 			String reimb_type = submitTemplate.getReimb_type();
 			//TODO: Figure out how to deal with receipts
-			//String receipt = submitTemplate.getReceipt();
+			byte[] receipt = submitTemplate.getReceipt();
 			logger.info("User attempted to submit Reimbursement of " + amount + " dollars and type " + reimb_type);
 			HttpSession session = req.getSession();
 			int user_id =  Integer.parseInt(session.getAttribute("user_id").toString());
-			Reimbursement reimb = new Reimbursement(amount, description, user_id, ReimbursementStatus.PENDING.getValue(), ReimbursementType.valueOf(reimb_type).getValue());
-			if(ReimbursementService.submitReimbursement(reimb)) {
+			Reimbursement reimb = new Reimbursement(amount, description, receipt, user_id, ReimbursementStatus.PENDING.getValue(), ReimbursementType.valueOf(reimb_type).getValue());
+			System.out.println(reimb);
+			if(true) {//ReimbursementService.submitReimbursement(reimb)) {
 				logger.info("Reimbursement created");
 				res.setContentType("application/json");
 				res.setStatus(200);
