@@ -8,7 +8,7 @@ public class ReimbursementDTO {
 	private double amount;
 	private String submitted;
 	private String resolved;
-	private byte[] receipt;
+	private String base64receipt;
 	private String desc;
 	private int author_id;
 	private int resolver_id;
@@ -19,14 +19,14 @@ public class ReimbursementDTO {
 		super();
 	}
 
-	public ReimbursementDTO(int reimb_id, double amount, String submitted, String resolved, byte[] receipt, String desc,
+	public ReimbursementDTO(int reimb_id, double amount, String submitted, String resolved, String base64receipt, String desc,
 			int author_id, int resolver_id, String status_id, String type_id) {
 		super();
 		this.reimb_id = reimb_id;
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
-		this.receipt = receipt;
+		this.base64receipt = base64receipt;
 		this.desc = desc;
 		this.author_id = author_id;
 		this.resolver_id = resolver_id;
@@ -66,12 +66,12 @@ public class ReimbursementDTO {
 		this.resolved = resolved;
 	}
 
-	public byte[] getReceipt() {
-		return receipt;
+	public String getBase64Receipt() {
+		return base64receipt;
 	}
 
-	public void setReceipt(byte[] receipt) {
-		this.receipt = receipt;
+	public void setBase64Receipt(String base64receipt) {
+		this.base64receipt = base64receipt;
 	}
 
 	public String getDesc() {
@@ -122,8 +122,8 @@ public class ReimbursementDTO {
 		temp = Double.doubleToLongBits(amount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + author_id;
+		result = prime * result + ((base64receipt == null) ? 0 : base64receipt.hashCode());
 		result = prime * result + ((desc == null) ? 0 : desc.hashCode());
-		result = prime * result + Arrays.hashCode(receipt);
 		result = prime * result + reimb_id;
 		result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
 		result = prime * result + resolver_id;
@@ -146,12 +146,15 @@ public class ReimbursementDTO {
 			return false;
 		if (author_id != other.author_id)
 			return false;
+		if (base64receipt == null) {
+			if (other.base64receipt != null)
+				return false;
+		} else if (!base64receipt.equals(other.base64receipt))
+			return false;
 		if (desc == null) {
 			if (other.desc != null)
 				return false;
 		} else if (!desc.equals(other.desc))
-			return false;
-		if (!Arrays.equals(receipt, other.receipt))
 			return false;
 		if (reimb_id != other.reimb_id)
 			return false;
@@ -183,10 +186,11 @@ public class ReimbursementDTO {
 	@Override
 	public String toString() {
 		return "ReimbursementDTO [reimb_id=" + reimb_id + ", amount=" + amount + ", submitted=" + submitted
-				+ ", resolved=" + resolved + ", receipt=" + Arrays.toString(receipt) + ", desc=" + desc + ", author_id="
+				+ ", resolved=" + resolved + ", base64receipt=" + base64receipt + ", desc=" + desc + ", author_id="
 				+ author_id + ", resolver_id=" + resolver_id + ", status_id=" + status_id + ", type_id=" + type_id
 				+ "]";
 	}
+
 	
 	
 }

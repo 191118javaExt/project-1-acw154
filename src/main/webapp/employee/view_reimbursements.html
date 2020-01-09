@@ -7,6 +7,11 @@
     <title>Employee Home Page</title>
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
 	body {
         font-family: Arial, Helvetica, sans-serif;
@@ -124,7 +129,25 @@
    	
     
   </tbody>
+  
 </table>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Receipt Image</h4>
+      </div>
+      <div class="modal-body">
+      	<img id="receiptImage" src="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <hr>
 <a class="btn btn-success" onclick="goBack()">BACK</a>
 </body>
@@ -144,15 +167,28 @@
 				'<td>' + reimb_list[reimb].amount + '</td>' +
 				'<td>' + reimb_list[reimb].submitted + '</td>' +
 				'<td>' + reimb_list[reimb].resolved + '</td>' +
-				'<td>' + reimb_list[reimb].receipt + '</td>' +
+				'<td id="receiptdata" data-toggle="modal" data-target="#myModal" data-id="">receipt</td>' +
 				'<td>' + reimb_list[reimb].desc + '</td>' +
 				'<td>' + reimb_list[reimb].resolver_id + '</td>' +
 				'<td>' + reimb_list[reimb].status_id + '</td>' +
 				'<td>' + reimb_list[reimb].type_id + '</td>';
 				reimb_body.appendChild(row);
+				console.log(reimb_list[reimb].base64Receipt);
+				document.getElementById('receiptdata').setAttribute('data-id', reimb_list[reimb].base64Receipt);
+				//document.getElementById('receiptdata').data-id = reimb_list[reimb].receipt;
+				console.log(document.getElementById('receiptdata').getAttribute('data-id'));
 		};
 			
 			
 	}
+	</script>
+	<script>	
+	$('#myModal').on('show.bs.modal', function(event) {
+		  var receiptFromTD = $(event.relatedTarget).attr('data-id');
+		  console.log(receiptFromTD)
+		  //$(this).find('#receiptImage').html($('<img src="${receiptFromTD}">'))
+		  $(this).find('#receiptImage').attr('src', `data:image/png;base64,${receiptFromTD}`);
+		  
+		});
   </script>
 </html>

@@ -260,7 +260,7 @@ function goBack(){
 		    		        	var file = e.target.result;
 		    		        	var base64result = file.split(',')[1];
 		    		            $('#img-upload').attr('src', file);
-		    		            sessionStorage.setItem('receiptArray', base64result);
+		    		            sessionStorage.setItem('receiptArray', file);
 		    		        }
 		    		        reader.readAsDataURL(input.files[0]);
 		    		    }

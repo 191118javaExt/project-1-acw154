@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -47,15 +48,19 @@ public class FMReimbViewServlet extends HttpServlet{
 				List<ReimbursementDTO> dtoList = new ArrayList<>();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 				for(Reimbursement re: list) {
+					String base64receipt = "";
 					String formatResolved = "";
 					if(re.getResolved() != null) {
 						formatResolved = re.getResolved().format(formatter);
+					}
+					if(re.getReceipt() != null) {
+						base64receipt = Base64.getEncoder().encodeToString(re.getReceipt());
 					}
 					dtoList.add(new ReimbursementDTO(re.getReimb_id(), 
 														re.getAmount(),
 														re.getSubmitted().format(formatter),
 														formatResolved,
-														re.getReceipt(),
+														base64receipt,
 														re.getDesc(),
 														re.getAuthor_id(),
 														re.getResolver_id(),
