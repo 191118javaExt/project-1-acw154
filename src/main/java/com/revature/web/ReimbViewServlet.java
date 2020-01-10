@@ -50,12 +50,22 @@ public class ReimbViewServlet extends HttpServlet{
 				for(Reimbursement re: list) {
 					String base64Receipt = "";
 					String formatResolved = "";
+					String r_id = "";
+					String re_desc = "";
 					if(re.getResolved() != null) {
 						formatResolved = re.getResolved().format(formatter);
 					}
 					if(re.getReceipt() != null) {
 						base64Receipt = new String(re.getReceipt(), "UTF-8");
+						re_desc = "Receipt";
 						//base64receipt.append(Base64.getEncoder().encodeToString(re.getReceipt()));
+					} else {
+						re_desc = "None";
+					}
+					if(re.getResolver_id() == 0) {
+						r_id = "None";
+					} else {
+						r_id = Integer.toString(re.getResolver_id());
 					}
 					System.out.println(base64Receipt);
 					//System.out.println(base64Receipt);
@@ -64,9 +74,10 @@ public class ReimbViewServlet extends HttpServlet{
 														re.getSubmitted().format(formatter),
 														formatResolved,
 														base64Receipt,
+														re_desc,
 														re.getDesc(),
 														re.getAuthor_id(),
-														re.getResolver_id(),
+														r_id,
 														ReimbursementStatus.valueOf(re.getStatus_id()).toString(),
 														ReimbursementType.valueOf(re.getType_id()).toString()));
 					//System.out.println(re.getDesc());

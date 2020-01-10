@@ -9,9 +9,10 @@ public class ReimbursementDTO {
 	private String submitted;
 	private String resolved;
 	private String base64receipt;
+	private String receiptDesc;
 	private String desc;
 	private int author_id;
-	private int resolver_id;
+	private String resolver_id;
 	private String status_id;
 	private String type_id;
 	
@@ -19,14 +20,15 @@ public class ReimbursementDTO {
 		super();
 	}
 
-	public ReimbursementDTO(int reimb_id, double amount, String submitted, String resolved, String base64receipt, String desc,
-			int author_id, int resolver_id, String status_id, String type_id) {
+	public ReimbursementDTO(int reimb_id, double amount, String submitted, String resolved, String base64receipt,
+			String receiptDesc, String desc, int author_id, String resolver_id, String status_id, String type_id) {
 		super();
 		this.reimb_id = reimb_id;
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.base64receipt = base64receipt;
+		this.receiptDesc = receiptDesc;
 		this.desc = desc;
 		this.author_id = author_id;
 		this.resolver_id = resolver_id;
@@ -66,12 +68,20 @@ public class ReimbursementDTO {
 		this.resolved = resolved;
 	}
 
-	public String getBase64Receipt() {
+	public String getBase64receipt() {
 		return base64receipt;
 	}
 
-	public void setBase64Receipt(String base64receipt) {
+	public void setBase64receipt(String base64receipt) {
 		this.base64receipt = base64receipt;
+	}
+
+	public String getReceiptDesc() {
+		return receiptDesc;
+	}
+
+	public void setReceiptDesc(String receiptDesc) {
+		this.receiptDesc = receiptDesc;
 	}
 
 	public String getDesc() {
@@ -90,11 +100,11 @@ public class ReimbursementDTO {
 		this.author_id = author_id;
 	}
 
-	public int getResolver_id() {
+	public String getResolver_id() {
 		return resolver_id;
 	}
 
-	public void setResolver_id(int resolver_id) {
+	public void setResolver_id(String resolver_id) {
 		this.resolver_id = resolver_id;
 	}
 
@@ -124,9 +134,10 @@ public class ReimbursementDTO {
 		result = prime * result + author_id;
 		result = prime * result + ((base64receipt == null) ? 0 : base64receipt.hashCode());
 		result = prime * result + ((desc == null) ? 0 : desc.hashCode());
+		result = prime * result + ((receiptDesc == null) ? 0 : receiptDesc.hashCode());
 		result = prime * result + reimb_id;
 		result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
-		result = prime * result + resolver_id;
+		result = prime * result + ((resolver_id == null) ? 0 : resolver_id.hashCode());
 		result = prime * result + ((status_id == null) ? 0 : status_id.hashCode());
 		result = prime * result + ((submitted == null) ? 0 : submitted.hashCode());
 		result = prime * result + ((type_id == null) ? 0 : type_id.hashCode());
@@ -156,6 +167,11 @@ public class ReimbursementDTO {
 				return false;
 		} else if (!desc.equals(other.desc))
 			return false;
+		if (receiptDesc == null) {
+			if (other.receiptDesc != null)
+				return false;
+		} else if (!receiptDesc.equals(other.receiptDesc))
+			return false;
 		if (reimb_id != other.reimb_id)
 			return false;
 		if (resolved == null) {
@@ -163,7 +179,10 @@ public class ReimbursementDTO {
 				return false;
 		} else if (!resolved.equals(other.resolved))
 			return false;
-		if (resolver_id != other.resolver_id)
+		if (resolver_id == null) {
+			if (other.resolver_id != null)
+				return false;
+		} else if (!resolver_id.equals(other.resolver_id))
 			return false;
 		if (status_id == null) {
 			if (other.status_id != null)
@@ -186,11 +205,12 @@ public class ReimbursementDTO {
 	@Override
 	public String toString() {
 		return "ReimbursementDTO [reimb_id=" + reimb_id + ", amount=" + amount + ", submitted=" + submitted
-				+ ", resolved=" + resolved + ", base64receipt=" + base64receipt + ", desc=" + desc + ", author_id="
-				+ author_id + ", resolver_id=" + resolver_id + ", status_id=" + status_id + ", type_id=" + type_id
-				+ "]";
+				+ ", resolved=" + resolved + ", base64receipt=" + base64receipt + ", receiptDesc=" + receiptDesc
+				+ ", desc=" + desc + ", author_id=" + author_id + ", resolver_id=" + resolver_id + ", status_id="
+				+ status_id + ", type_id=" + type_id + "]";
 	}
 
+	
 	
 	
 }

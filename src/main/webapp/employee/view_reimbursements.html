@@ -162,14 +162,14 @@
 		let reimb_list = JSON.parse(reimbString);
 		console.log(reimb_list);
 		for(reimb in reimb_list) {
-				var base64Receipt = reimb_list[reimb].base64Receipt;
+				var base64Receipt = reimb_list[reimb].base64receipt;
 				var row = document.createElement('tr');
 				row.innerHTML = '<td>' + reimb_list[reimb].reimb_id + '</td>' +
 				'<td>' + reimb_list[reimb].amount + '</td>' +
 				'<td>' + reimb_list[reimb].submitted + '</td>' +
 				'<td>' + reimb_list[reimb].resolved + '</td>' +
 				//'<td><img src="" border=3 height=100 width=100/></td'
-				`<td data-toggle="modal" data-target="#myModal" value=${base64Receipt}>receipt</td>` +
+				`<td data-toggle="modal" data-target="#myModal" data-id=${base64Receipt}>${reimb_list[reimb].receiptDesc}</td>` +
 				'<td>' + reimb_list[reimb].desc + '</td>' +
 				'<td>' + reimb_list[reimb].resolver_id + '</td>' +
 				'<td>' + reimb_list[reimb].status_id + '</td>' +
@@ -187,8 +187,8 @@
 	<script>	
 	$('#myModal').on('show.bs.modal', function(event) {
 		//console.log($(event.relatedTarget));
-		console.log($(event.relatedTarget).attr('value'));
-		var receiptFromTD = $(event.relatedTarget).attr('value');
+		console.log($(event.relatedTarget).attr('data-id'));
+		var receiptFromTD = $(event.relatedTarget).attr('data-id');
 		//console.log(receiptFromTD)
 		  //$(this).find('#receiptImage').html($('<img src="${receiptFromTD}">'))
 		$(this).find('#receiptImage').attr('src', `data:image/png;base64, ${receiptFromTD}`);

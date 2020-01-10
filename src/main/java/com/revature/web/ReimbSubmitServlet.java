@@ -72,7 +72,7 @@ public class ReimbSubmitServlet extends HttpServlet{
 			int user_id =  Integer.parseInt(session.getAttribute("user_id").toString());
 			Reimbursement reimb = new Reimbursement(amount, description, receipt, user_id, ReimbursementStatus.PENDING.getValue(), ReimbursementType.valueOf(reimb_type).getValue());
 			System.out.println(reimb);
-			if(true) {//ReimbursementService.submitReimbursement(reimb)) {
+			if(ReimbursementService.submitReimbursement(reimb)) {
 				logger.info("Reimbursement created");
 				res.setContentType("application/json");
 				res.setStatus(200);

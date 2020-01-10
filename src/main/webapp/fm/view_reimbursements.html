@@ -131,6 +131,22 @@
    
   </tbody>
 </table>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Receipt Image</h4>
+      </div>
+      <div class="modal-body">
+      	<img id="receiptImage" src="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <hr>
 <a class="btn btn-success" onclick="goBack()">BACK</a>
 </body>
@@ -145,22 +161,38 @@
 		let reimb_list = JSON.parse(reimbString);
 		console.log(reimb_list);
 		for(reimb in reimb_list) {
+				var base64Receipt = reimb_list[reimb].base64receipt;
 				var row = document.createElement('tr');
-				row.innerHTML = 
-				'<td>' + reimb_list[reimb].reimb_id + '</td>' +
+				row.innerHTML = '<td>' + reimb_list[reimb].reimb_id + '</td>' +
 				'<td>' + reimb_list[reimb].amount + '</td>' +
 				'<td>' + reimb_list[reimb].submitted + '</td>' +
 				'<td>' + reimb_list[reimb].resolved + '</td>' +
-				'<td>' + reimb_list[reimb].receipt + '</td>' +
+				//'<td><img src="" border=3 height=100 width=100/></td'
+				`<td data-toggle="modal" data-target="#myModal" data-id=${base64Receipt}>${reimb_list[reimb].receiptDesc}</td>` +
 				'<td>' + reimb_list[reimb].desc + '</td>' +
 				'<td>' + reimb_list[reimb].author_id + '</td>' +
 				'<td>' + reimb_list[reimb].resolver_id + '</td>' +
 				'<td>' + reimb_list[reimb].status_id + '</td>' +
 				'<td>' + reimb_list[reimb].type_id + '</td>';
 				reimb_body.appendChild(row);
+				console.log(base64Receipt);
+				//document.getElementById('receiptdata').setAttribute('data-id', reimb_list[reimb].base64Receipt);
+				//document.getElementById('receiptdata').data-id = reimb_list[reimb].receipt;
+				//console.log(document.getElementById('receiptdata').getAttribute('data-id'));
 		};
 			
 			
 	}
+	</script>
+	<script>	
+	$('#myModal').on('show.bs.modal', function(event) {
+		//console.log($(event.relatedTarget));
+		console.log($(event.relatedTarget).attr('data-id'));
+		var receiptFromTD = $(event.relatedTarget).attr('data-id');
+		//console.log(receiptFromTD)
+		  //$(this).find('#receiptImage').html($('<img src="${receiptFromTD}">'))
+		$(this).find('#receiptImage').attr('src', `data:image/png;base64, ${receiptFromTD}`);
+		  
+		});
   </script>
 </html>
