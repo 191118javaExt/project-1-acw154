@@ -162,21 +162,23 @@
 		let reimb_list = JSON.parse(reimbString);
 		console.log(reimb_list);
 		for(reimb in reimb_list) {
+				var base64Receipt = reimb_list[reimb].base64Receipt;
 				var row = document.createElement('tr');
 				row.innerHTML = '<td>' + reimb_list[reimb].reimb_id + '</td>' +
 				'<td>' + reimb_list[reimb].amount + '</td>' +
 				'<td>' + reimb_list[reimb].submitted + '</td>' +
 				'<td>' + reimb_list[reimb].resolved + '</td>' +
-				'<td id="receiptdata" data-toggle="modal" data-target="#myModal" data-id="">receipt</td>' +
+				//'<td><img src="" border=3 height=100 width=100/></td'
+				`<td data-toggle="modal" data-target="#myModal" value=${base64Receipt}>receipt</td>` +
 				'<td>' + reimb_list[reimb].desc + '</td>' +
 				'<td>' + reimb_list[reimb].resolver_id + '</td>' +
 				'<td>' + reimb_list[reimb].status_id + '</td>' +
 				'<td>' + reimb_list[reimb].type_id + '</td>';
 				reimb_body.appendChild(row);
-				console.log(reimb_list[reimb].base64Receipt);
-				document.getElementById('receiptdata').setAttribute('data-id', reimb_list[reimb].base64Receipt);
+				console.log(base64Receipt);
+				//document.getElementById('receiptdata').setAttribute('data-id', reimb_list[reimb].base64Receipt);
 				//document.getElementById('receiptdata').data-id = reimb_list[reimb].receipt;
-				console.log(document.getElementById('receiptdata').getAttribute('data-id'));
+				//console.log(document.getElementById('receiptdata').getAttribute('data-id'));
 		};
 			
 			
@@ -184,10 +186,12 @@
 	</script>
 	<script>	
 	$('#myModal').on('show.bs.modal', function(event) {
-		  var receiptFromTD = $(event.relatedTarget).attr('data-id');
-		  console.log(receiptFromTD)
+		//console.log($(event.relatedTarget));
+		console.log($(event.relatedTarget).attr('value'));
+		var receiptFromTD = $(event.relatedTarget).attr('value');
+		//console.log(receiptFromTD)
 		  //$(this).find('#receiptImage').html($('<img src="${receiptFromTD}">'))
-		  $(this).find('#receiptImage').attr('src', `data:image/png;base64,${receiptFromTD}`);
+		$(this).find('#receiptImage').attr('src', `data:image/png;base64, ${receiptFromTD}`);
 		  
 		});
   </script>
