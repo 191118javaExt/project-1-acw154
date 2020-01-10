@@ -48,6 +48,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				}
 				String desc = rs.getString("reimb_description");
 				byte[] b = rs.getBytes("reimb_receipt");
+				//turn into string?
 				if(rs.wasNull()) {
 					b = null;
 				}

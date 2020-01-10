@@ -48,19 +48,22 @@ public class ReimbViewServlet extends HttpServlet{
 				List<ReimbursementDTO> dtoList = new ArrayList<>();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 				for(Reimbursement re: list) {
-					StringBuilder base64receipt = new StringBuilder();
+					String base64Receipt = "";
 					String formatResolved = "";
 					if(re.getResolved() != null) {
 						formatResolved = re.getResolved().format(formatter);
 					}
 					if(re.getReceipt() != null) {
-						base64receipt.append(Base64.getEncoder().encodeToString(re.getReceipt()));
+						base64Receipt = new String(re.getReceipt(), "UTF-8");
+						//base64receipt.append(Base64.getEncoder().encodeToString(re.getReceipt()));
 					}
+					System.out.println(base64Receipt);
+					//System.out.println(base64Receipt);
 					dtoList.add(new ReimbursementDTO(re.getReimb_id(), 
 														re.getAmount(),
 														re.getSubmitted().format(formatter),
 														formatResolved,
-														base64receipt.toString(),
+														base64Receipt,
 														re.getDesc(),
 														re.getAuthor_id(),
 														re.getResolver_id(),

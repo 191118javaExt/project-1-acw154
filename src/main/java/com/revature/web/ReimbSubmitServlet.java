@@ -3,6 +3,7 @@ package com.revature.web;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -54,10 +55,11 @@ public class ReimbSubmitServlet extends HttpServlet{
 		}
 		System.out.println(values);
 		//SubmitTemplate submitTemplate = om.readValue(body, SubmitTemplate.class);
+		System.out.println(values.get(3));
 		SubmitTemplate submitTemplate = new SubmitTemplate(values.get(0), 
 													values.get(1),
 													values.get(2),
-													values.get(3).getBytes());
+													values.get(3).getBytes("UTF-8"));
 		System.out.println(submitTemplate);
 		try{
 			Double amount = Double.parseDouble(submitTemplate.getAmount());
@@ -70,7 +72,7 @@ public class ReimbSubmitServlet extends HttpServlet{
 			int user_id =  Integer.parseInt(session.getAttribute("user_id").toString());
 			Reimbursement reimb = new Reimbursement(amount, description, receipt, user_id, ReimbursementStatus.PENDING.getValue(), ReimbursementType.valueOf(reimb_type).getValue());
 			System.out.println(reimb);
-			if(ReimbursementService.submitReimbursement(reimb)) {
+			if(true) {//ReimbursementService.submitReimbursement(reimb)) {
 				logger.info("Reimbursement created");
 				res.setContentType("application/json");
 				res.setStatus(200);
