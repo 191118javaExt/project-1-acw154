@@ -20,6 +20,7 @@ import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 import com.revature.models.ReviewTemplate;
 import com.revature.models.SubmitTemplate;
+import com.revature.repositories.ReimbursementDAOImpl;
 import com.revature.services.ReimbursementService;
 import com.revature.services.UserService;
 
@@ -33,7 +34,7 @@ public class ReimbReviewServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 		throws ServletException, IOException {
 		BufferedReader reader = req.getReader();
-		
+		ReimbursementService rs = new ReimbursementService(new ReimbursementDAOImpl());
 		StringBuilder s = new StringBuilder();
 		String line = reader.readLine();
 		while(line != null) {
@@ -50,14 +51,14 @@ public class ReimbReviewServlet extends HttpServlet{
 			ReimbursementStatus status = ReimbursementStatus.valueOf(reviewAttempt.getReimb_status());
 			HttpSession session = req.getSession();
 			int user_id = Integer.parseInt(session.getAttribute("user_id").toString());
-			if(ReimbursementService.findReimbursement(reimb_id) == null) {
+			if(rs.findReimbursement(reimb_id) == null) {
 				logger.warn("Reimbursement does not exist");
 				res.setContentType("application/json");
 				res.setStatus(204);
 			} else {
 				switch(status) {
 					case APPROVED: {
-						if(ReimbursementService.approveReimbursement(reimb_id, user_id)){
+						if(rs.approveReimbursement(reimb_id, user_id)){
 							logger.info("Approved Reimbursement " + reimb_id);	
 							res.setContentType("application/json");
 							res.setStatus(200);
@@ -70,7 +71,7 @@ public class ReimbReviewServlet extends HttpServlet{
 					}
 					
 					case DENIED: {
-						if(ReimbursementService.denyReimbursement(reimb_id, user_id)) {
+						if(rs.denyReimbursement(reimb_id, user_id)) {
 							logger.info("Denied Reimbursement " + reimb_id);	
 							res.setContentType("application/json");
 							res.setStatus(200);

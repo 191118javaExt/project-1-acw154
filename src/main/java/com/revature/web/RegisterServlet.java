@@ -19,6 +19,7 @@ import com.revature.models.RegisterTemplate;
 import com.revature.models.User;
 import com.revature.models.UserDTO;
 import com.revature.models.UserRoles;
+import com.revature.repositories.UserDAOImpl;
 import com.revature.services.UserService;
 
 public class RegisterServlet extends HttpServlet {
@@ -29,8 +30,8 @@ public class RegisterServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 		throws ServletException, IOException {
-BufferedReader reader = req.getReader();
-		
+		BufferedReader reader = req.getReader();
+		UserService us = new UserService(new UserDAOImpl());
 		StringBuilder s = new StringBuilder();
 		String line = reader.readLine();
 		while(line != null) {
@@ -45,10 +46,10 @@ BufferedReader reader = req.getReader();
 		//String password = registerAttempt.getPassword();
 		
 		logger.info("User attempted to register with username " + username);
-		User u = UserService.findUserByUsername(username);
+		User u = us.findUserByUsername(username);
 		if(u == null) {
 			HttpSession session = req.getSession();
-			if(UserService.createUser(new User(registerAttempt.getUsername(),
+			if(us.createUser(new User(registerAttempt.getUsername(),
 											registerAttempt.getPassword(),
 											registerAttempt.getFname(),
 											registerAttempt.getLname(),

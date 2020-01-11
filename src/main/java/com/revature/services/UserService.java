@@ -11,21 +11,25 @@ import com.revature.repositories.UserDAO;
 import com.revature.repositories.UserDAOImpl;
 
 public class UserService {
-	private static UserDAO repository = new UserDAOImpl();
+	private UserDAO repository = new UserDAOImpl();
 	
-	public static User findUser(int user_id) {
+	public UserService(UserDAO repository) {
+		this.repository = repository;
+	}
+	
+	public  User findUser(int user_id) {
 		return repository.findUser(user_id);
 	}
 	
-	public static List<User>  findAllUsers(){
+	public  List<User>  findAllUsers(){
 		return repository.findAllUsers();
 	}
 	
-	public static List<User> findUsersByRole(UserRoles role){
+	public  List<User> findUsersByRole(UserRoles role){
 		return repository.findUsersByRole(role);
 	}
 	
-	public static boolean createUser(User u) {
+	public  boolean createUser(User u) {
 		u.setPassword(DigestUtils.sha256Hex(u.getPassword()));
 		if(verifyUniqueUser(u.getUsername())) {
 			return repository.createUser(u);
@@ -34,11 +38,11 @@ public class UserService {
 		}
 	}
 	
-	public static boolean deleteUser(int user_id) {
+	public  boolean deleteUser(int user_id) {
 		return repository.deleteUser(user_id);
 	}
 	
-	public static User verifyUser(String username, String password) {
+	public  User verifyUser(String username, String password) {
 		User found = repository.findUserByUsername(username);
 		if(found != null) {
 			String hex_password = DigestUtils.sha256Hex(password);
@@ -49,7 +53,7 @@ public class UserService {
 		return null;
 	}
 	
-	public static boolean verifyEmployee(String username) {
+	public  boolean verifyEmployee(String username) {
 		List<User> list = repository.findUsersByRole(UserRoles.EMPLOYEE);
 		if(!list.isEmpty()) {
 			for(User u: list) {
@@ -61,7 +65,7 @@ public class UserService {
 		return false;
 	}
 	
-	public static boolean verifyUniqueUser(String username) {
+	public  boolean verifyUniqueUser(String username) {
 		if(repository.findUserByUsername(username) == null) {
 			return true;
 		} else {
@@ -69,7 +73,7 @@ public class UserService {
 		}
 	}
 	
-	public static User findUserByUsername(String user) {
+	public  User findUserByUsername(String user) {
 		return repository.findUserByUsername(user);
 	}
 

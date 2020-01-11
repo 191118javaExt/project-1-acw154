@@ -26,6 +26,7 @@ import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 import com.revature.models.SubmitTemplate;
+import com.revature.repositories.ReimbursementDAOImpl;
 import com.revature.services.ReimbursementService;
 import com.revature.services.UserService;
 
@@ -39,7 +40,7 @@ public class ReimbSubmitServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 		throws ServletException, IOException {
 		BufferedReader reader = req.getReader();
-		
+		ReimbursementService rs = new ReimbursementService(new ReimbursementDAOImpl());
 		StringBuilder s = new StringBuilder();
 		String line = reader.readLine();
 		while(line != null) {
@@ -72,7 +73,7 @@ public class ReimbSubmitServlet extends HttpServlet{
 			int user_id =  Integer.parseInt(session.getAttribute("user_id").toString());
 			Reimbursement reimb = new Reimbursement(amount, description, receipt, user_id, ReimbursementStatus.PENDING.getValue(), ReimbursementType.valueOf(reimb_type).getValue());
 			System.out.println(reimb);
-			if(ReimbursementService.submitReimbursement(reimb)) {
+			if(rs.submitReimbursement(reimb)) {
 				logger.info("Reimbursement created");
 				res.setContentType("application/json");
 				res.setStatus(200);

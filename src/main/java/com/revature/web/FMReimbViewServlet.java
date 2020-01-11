@@ -21,6 +21,7 @@ import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementDTO;
 import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
+import com.revature.repositories.ReimbursementDAOImpl;
 import com.revature.services.ReimbursementService;
 
 public class FMReimbViewServlet extends HttpServlet{
@@ -33,11 +34,12 @@ public class FMReimbViewServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
 		throws ServletException, IOException {
 		HttpSession session = req.getSession();
+		ReimbursementService rs = new ReimbursementService(new ReimbursementDAOImpl());
 		try{
 			String username = session.getAttribute("username").toString();
 			//int user_id = Integer.parseInt(session.getAttribute("user_id").toString());
 			logger.info("User " + username + " is attempting to view reimbursements");
-			List<Reimbursement> list = ReimbursementService.findAllReimbursements();
+			List<Reimbursement> list = rs.findAllReimbursements();
 			if(list.isEmpty()) {
 				logger.warn("User " + username + " does not have any reimbursements");	
 				res.setContentType("application/json");

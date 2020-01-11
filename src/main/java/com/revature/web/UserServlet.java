@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.User;
 import com.revature.models.UserDTO;
+import com.revature.repositories.UserDAOImpl;
 import com.revature.services.UserService;
 
 public class UserServlet extends HttpServlet {
@@ -25,8 +26,9 @@ public class UserServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
 		throws ServletException, IOException {
+		UserService us = new UserService(new UserDAOImpl());
 		res.setContentType("application/json");
-		List<User> all = UserService.findAllUsers();
+		List<User> all = us.findAllUsers();
 		List<UserDTO> allDTO = new ArrayList<>();
 		
 		for(User u : all) {
