@@ -19,9 +19,9 @@ public class ReimbursementService {
 		return repository.findReimbursement(reimb_id);
 	}
 	
-	public List<Reimbursement> findReimbursementsByStatus(ReimbursementStatus status){
-		return repository.findReimbursementsByStatus(status);
-	}
+//	public List<Reimbursement> findReimbursementsByStatus(ReimbursementStatus status){
+//		return repository.findReimbursementsByStatus(status);
+//	}
 	
 	public List<Reimbursement> findAllReimbursements(){
 		return repository.findAllReimbursements();
@@ -31,9 +31,9 @@ public class ReimbursementService {
 		return repository.submitReimbursement(reimb);
 	}
 	
-	public boolean deleteReimbursement(int reimb_id) {
-		return repository.deleteReimbursement(reimb_id);
-	}
+//	public boolean deleteReimbursement(int reimb_id) {
+//		return repository.deleteReimbursement(reimb_id);
+//	}
 	
 	public boolean approveReimbursement(int reimb_id, int resolvr_id) {
 		return repository.approveReimbursement(reimb_id, resolvr_id);

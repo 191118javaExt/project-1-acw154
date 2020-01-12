@@ -25,22 +25,22 @@ public class UserService {
 		return repository.findAllUsers();
 	}
 	
-	public  List<User> findUsersByRole(UserRoles role){
-		return repository.findUsersByRole(role);
-	}
+//	public  List<User> findUsersByRole(UserRoles role){
+//		return repository.findUsersByRole(role);
+//	}
 	
 	public  boolean createUser(User u) {
-		u.setPassword(DigestUtils.sha256Hex(u.getPassword()));
-		if(verifyUniqueUser(u.getUsername())) {
+		if(repository.findUserByUsername(u.getUsername()) == null) {
+			u.setPassword(DigestUtils.sha256Hex(u.getPassword()));
 			return repository.createUser(u);
 		} else {
 			return false;
 		}
 	}
 	
-	public  boolean deleteUser(int user_id) {
-		return repository.deleteUser(user_id);
-	}
+//	public  boolean deleteUser(int user_id) {
+//		return repository.deleteUser(user_id);
+//	}
 	
 	public  User verifyUser(String username, String password) {
 		User found = repository.findUserByUsername(username);
@@ -65,13 +65,13 @@ public class UserService {
 		return false;
 	}
 	
-	public  boolean verifyUniqueUser(String username) {
-		if(repository.findUserByUsername(username) == null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+//	public  boolean verifyUniqueUser(String username) {
+//		if(repository.findUserByUsername(username) == null) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 	
 	public  User findUserByUsername(String user) {
 		return repository.findUserByUsername(user);
