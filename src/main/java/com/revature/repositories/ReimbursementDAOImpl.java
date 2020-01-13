@@ -234,11 +234,11 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	@Override
 	public boolean approveReimbursement(int reimb_id, int resolvr_id) {
 		try(Connection conn = ConnectionUtil.getConnection()){
-			String query = "UPDATE project1.ers_reimbursement SET reimb_status_id = 1, reimb_resolver = (?), reimb_resolved = (?) WHERE reimb_id= (?);";
+			String query = "UPDATE project1.ers_reimbursement SET reimb_status_id = 1, reimb_resolver = (?) WHERE reimb_id= (?);";
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, resolvr_id);
-			stmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
-			stmt.setInt(3, reimb_id);
+			//stmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+			stmt.setInt(2, reimb_id);
 			if(!stmt.execute()){
 				return true;
 			}
@@ -252,11 +252,11 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	@Override
 	public boolean denyReimbursement(int reimb_id, int resolvr_id) {
 		try(Connection conn = ConnectionUtil.getConnection()){
-			String query = "UPDATE project1.ers_reimbursement SET reimb_status_id = -1, reimb_resolver = (?), reimb_resolved = (?)WHERE reimb_id= (?);";
+			String query = "UPDATE project1.ers_reimbursement SET reimb_status_id = -1, reimb_resolver = (?) WHERE reimb_id= (?);";
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, resolvr_id);
-			stmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
-			stmt.setInt(3, reimb_id);
+			//stmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+			stmt.setInt(2, reimb_id);
 			if(!stmt.execute()){
 				return true;
 			}

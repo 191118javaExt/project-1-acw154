@@ -85,14 +85,14 @@ $$
 	END
 $$ LANGUAGE plpgsql;
 
---CREATE OR REPLACE FUNCTION set_resolved_time_f() RETURNS TRIGGER 
---AS 
---$$
---	BEGIN 
---		OLD.reimb_resolved = now();
---		return OLD;
---	END
---$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION set_resolved_time_f() RETURNS TRIGGER 
+AS 
+$$
+	BEGIN 
+		NEW.reimb_resolved = now();
+		return NEW;
+	END
+$$ LANGUAGE plpgsql;
 
 CREATE TRIGGER set_submitted_time
 before insert
@@ -100,15 +100,15 @@ ON ers_reimbursement
 FOR EACH row
 	EXECUTE PROCEDURE set_submitted_time_f();
 
---CREATE TRIGGER set_resolved_time
---BEFORE UPDATE
---ON ers_reimbursement
---FOR EACH row
---	EXECUTE PROCEDURE set_resolved_time_f();
+CREATE TRIGGER set_resolved_time
+BEFORE UPDATE
+ON ers_reimbursement
+FOR EACH row
+	EXECUTE PROCEDURE set_resolved_time_f();
 --
 --
 --DROP TRIGGER set_resolved_time on ers_reimbursement;
 
 --UPDATE ers_reimbursement SET reimb_status_id = 0, reimb_resolver = null WHERE reimb_id= 1;
 
---UPDATE ers_reimbursement SET reimb_status_id = 0 WHERE reimb_id = 9;
+UPDATE ers_reimbursement SET reimb_status_id = 0 WHERE reimb_id = 9;
