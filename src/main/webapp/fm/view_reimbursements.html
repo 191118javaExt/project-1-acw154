@@ -20,7 +20,7 @@
 		background-size: cover;
 		background-position: center center;
 		background-color: #fff;
-        overflow: hidden;
+        overflow: scroll;
         width: 100%;    
         height: 100vh;
     }
@@ -140,6 +140,7 @@
       </div>
       <div class="modal-body">
       	<img id="receiptImage" src="">
+      	<p id="someText"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -191,7 +192,11 @@
 		var receiptFromTD = $(event.relatedTarget).attr('data-id');
 		//console.log(receiptFromTD)
 		  //$(this).find('#receiptImage').html($('<img src="${receiptFromTD}">'))
-		$(this).find('#receiptImage').attr('src', `data:image/png;base64, ${receiptFromTD}`);
+		if(receiptFromTD == ""){
+			$(this).find('#someText').text("No Receipt");
+		} else {
+			$(this).find('#receiptImage').attr('src', `data:image/png;base64, ${receiptFromTD}`);
+		}
 		  
 		});
   </script>

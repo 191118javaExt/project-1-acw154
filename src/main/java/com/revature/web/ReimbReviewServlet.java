@@ -51,8 +51,14 @@ public class ReimbReviewServlet extends HttpServlet{
 			ReimbursementStatus status = ReimbursementStatus.valueOf(reviewAttempt.getReimb_status());
 			HttpSession session = req.getSession();
 			int user_id = Integer.parseInt(session.getAttribute("user_id").toString());
-			if(rs.findReimbursement(reimb_id) == null) {
+			Reimbursement re = rs.findReimbursement(reimb_id);
+			//System.out.println(re.getStatus_id());
+			if(re == null) {
 				logger.warn("Reimbursement does not exist");
+				res.setContentType("application/json");
+				res.setStatus(204);
+			} else if(re.getStatus_id() != 0) {
+				logger.warn("User attempted to approve/deny resolved reimbursement");
 				res.setContentType("application/json");
 				res.setStatus(204);
 			} else {

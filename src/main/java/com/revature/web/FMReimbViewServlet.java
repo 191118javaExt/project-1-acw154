@@ -56,6 +56,8 @@ public class FMReimbViewServlet extends HttpServlet{
 					String re_desc = "";
 					if(re.getResolved() != null) {
 						formatResolved = re.getResolved().format(formatter);
+					} else {
+						formatResolved = "N/A";
 					}
 					if(re.getReceipt() != null) {
 						base64Receipt = new String(re.getReceipt(), "UTF-8");
@@ -69,8 +71,6 @@ public class FMReimbViewServlet extends HttpServlet{
 					} else {
 						r_id = Integer.toString(re.getResolver_id());
 					}
-					System.out.println(base64Receipt);
-					//System.out.println(base64Receipt);
 					dtoList.add(new ReimbursementDTO(re.getReimb_id(), 
 														re.getAmount(),
 														re.getSubmitted().format(formatter),

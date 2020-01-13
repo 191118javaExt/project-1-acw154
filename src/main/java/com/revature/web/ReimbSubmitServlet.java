@@ -66,7 +66,6 @@ public class ReimbSubmitServlet extends HttpServlet{
 			Double amount = Double.parseDouble(submitTemplate.getAmount());
 			String description = submitTemplate.getDescription();
 			String reimb_type = submitTemplate.getReimb_type();
-			//TODO: Figure out how to deal with receipts
 			byte[] receipt = submitTemplate.getReceipt();
 			logger.info("User attempted to submit Reimbursement of " + amount + " dollars and type " + reimb_type);
 			HttpSession session = req.getSession();

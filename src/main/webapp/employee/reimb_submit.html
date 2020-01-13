@@ -200,7 +200,7 @@ function goBack(){
   <div class="form-group row">
     <label for="amount" class="col-sm-2 col-form-label">Amount</label>
     <div class="col-sm-10">
-      <input type="number" name="amount" class="form-control" placeholder="Dollar Amount" step="0.01" min="0" max="11" required>
+      <input type="number" name="amount" class="form-control" placeholder="Dollar Amount" step="0.01" min="0" max="99999999.99" required>
     </div>
   </div>
   <div class="form-group row">
@@ -260,7 +260,7 @@ function goBack(){
 		    		        	var file = e.target.result;
 		    		        	var base64result = file.split(',')[1];
 		    		            $('#img-upload').attr('src', file);
-		    		            sessionStorage.setItem('receiptArray', file);
+		    		            sessionStorage.setItem('receiptArray', base64result);
 		    		        }
 		    		        reader.readAsDataURL(input.files[0]);
 		    		    }

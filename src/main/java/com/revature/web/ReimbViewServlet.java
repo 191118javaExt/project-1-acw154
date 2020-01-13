@@ -57,11 +57,12 @@ public class ReimbViewServlet extends HttpServlet{
 					String re_desc = "";
 					if(re.getResolved() != null) {
 						formatResolved = re.getResolved().format(formatter);
+					} else {
+						formatResolved = "N/A";
 					}
 					if(re.getReceipt() != null) {
 						base64Receipt = new String(re.getReceipt(), "UTF-8");
 						re_desc = "Receipt";
-						//base64receipt.append(Base64.getEncoder().encodeToString(re.getReceipt()));
 					} else {
 						re_desc = "None";
 					}
@@ -70,8 +71,6 @@ public class ReimbViewServlet extends HttpServlet{
 					} else {
 						r_id = Integer.toString(re.getResolver_id());
 					}
-					System.out.println(base64Receipt);
-					//System.out.println(base64Receipt);
 					dtoList.add(new ReimbursementDTO(re.getReimb_id(), 
 														re.getAmount(),
 														re.getSubmitted().format(formatter),
@@ -83,7 +82,6 @@ public class ReimbViewServlet extends HttpServlet{
 														r_id,
 														ReimbursementStatus.valueOf(re.getStatus_id()).toString(),
 														ReimbursementType.valueOf(re.getType_id()).toString()));
-					//System.out.println(re.getDesc());
 				}
 				
 				out.println(om.writeValueAsString(dtoList));

@@ -34,10 +34,9 @@ function reviewReimbursement(){
 	
 	let xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
-
 		if(this.readyState === 4 && this.status === 200) {
 			console.log(this.responseText);
-			alert("Reimbursement " + reimb_id + "has been " + reimb_status);
+			alert("Reimbursement " + reimb_id + " has been " + reimb_status);
 			reviewForm.reset();
 		}
 		
